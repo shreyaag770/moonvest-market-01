@@ -23,7 +23,7 @@ import DialogMenu from "../src/components/DialogMenu";
 import NavMenu from './components/NavMenu';
 
 // usestyles
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   header: {
     background: "linear-gradient(to bottom right, #132639, #884dff)",
     paddingRight: "30px",
@@ -33,10 +33,9 @@ const useStyles = makeStyles(() => ({
     },
   },
   logo: {
-    fontFamily: "Work Sans, sans-serif",
-    fontWeight: 700,
-    color: "#FFFEFE",
-    textAlign: "left",
+    [theme.breakpoints.down('xs')]: {
+      height:"11px"
+    }
   },
   menuButton: {
     fontFamily: "Open Sans, sans-serif",
@@ -58,6 +57,11 @@ const useStyles = makeStyles(() => ({
     border: "1px solid #6849C4",
     textTransform: "none",
   },
+  connectButton:{
+    [theme.breakpoints.down('xs')]: {
+      fontSize:"9px"
+    },
+  }
 }));
 
 // menu data
@@ -79,6 +83,8 @@ export default function Header() {
   const [mvnBalance, setMvnBalance] = useState(0);
   const [bnbBalance, setBnbBalance] = useState(0);
   const { connectedButton } = useStyles();
+  const { connectButton } = useStyles();
+  const { logo } = useStyles();
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
@@ -125,7 +131,7 @@ export default function Header() {
   const walletButton = () => {
     return (
       <Button
-        {...(connected ? { className: connectedButton } : "")}
+        {...(connected ? { className: connectedButton } : {className: connectButton})}
         size={mobileView ? "small" : "large"}
         onClick={connectWalletClicked}
         variant="contained"
@@ -148,7 +154,7 @@ export default function Header() {
         <Container fixed>
           <Toolbar>
             <NavLink className="navbar-brand" to="/">
-              <img src={"img/Logo.png"} height="20" className="logo" alt="" />
+              <img src={"img/Logo.png"} height="20" className={logo} alt="" />
             </NavLink>
             <Hidden smDown>
               <div className="d-flex align-items-center">

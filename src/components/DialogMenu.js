@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  btnSize:{
+    [theme.breakpoints.down('sm')]:{
+      height:"8"
+    }
+  }
 }));
 
 
@@ -82,8 +87,8 @@ export default function FullScreenDialog(props) {
 
   return (
     <div className={classes.root}>
-      <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
-        <MenuIcon />
+      <IconButton variant="outlined" color="primary" className={classes.btnSize} onClick={handleClickOpen}>
+        <MenuIcon  />
       </IconButton>
       <Dialog
         fullScreen={fullScreen}
